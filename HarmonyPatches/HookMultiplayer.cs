@@ -2,11 +2,11 @@
 using HarmonyLib;
 
 namespace Camera2.HarmonyPatches {
-	[HarmonyPatch(typeof(MultiplayerSessionManager), "UpdateConnectionState")]
+	[HarmonyPatch(typeof(MultiplayerSessionManager<NetworkMessageType, MultiplayerSessionType>), "UpdateConnectionState")]
 	static class HookMultiplayer {
-		private static MultiplayerSessionManager _instance;
-		public static MultiplayerSessionManager instance => _instance == null ? null : _instance;
-		static void Postfix(MultiplayerSessionManager __instance) {
+		private static MultiplayerSessionManager<NetworkMessageType, MultiplayerSessionType> _instance;
+		public static MultiplayerSessionManager<NetworkMessageType, MultiplayerSessionType> instance => _instance == null ? null : _instance;
+		static void Postfix(MultiplayerSessionManager<NetworkMessageType, MultiplayerSessionType> __instance) {
 #if DEBUG
 			Plugin.Log.Info($"Multiplayer connection state changed. Connected: {__instance.isConnected}");
 #endif
